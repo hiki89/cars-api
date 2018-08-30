@@ -14,7 +14,7 @@ class CarsController extends Controller
      */
     public function index()
     {
-        //
+        return Car::all();
     }
 
     /**
@@ -22,10 +22,10 @@ class CarsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+    // public function create()
+    // {
+    //     //
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -35,7 +35,7 @@ class CarsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Car::create($request->all());
     }
 
     /**
@@ -44,9 +44,9 @@ class CarsController extends Controller
      * @param  \App\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function show(Car $car)
+    public function show($id)
     {
-        //
+        return Car::find($id);
     }
 
     /**
@@ -55,10 +55,10 @@ class CarsController extends Controller
      * @param  \App\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function edit(Car $car)
-    {
-        //
-    }
+    // public function edit(Car $car)
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -67,9 +67,11 @@ class CarsController extends Controller
      * @param  \App\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Car $car)
+    public function update(Request $request, $id)
     {
-        //
+        $car = Car::findOrFail($id);
+        $car->update($request->all());
+        return $car;
     }
 
     /**
@@ -78,8 +80,8 @@ class CarsController extends Controller
      * @param  \App\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Car $car)
+    public function destroy($id)
     {
-        //
+        return Car::destroy($id);
     }
 }
