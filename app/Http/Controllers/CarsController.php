@@ -13,9 +13,12 @@ class CarsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Car::all();
+        $take = $request->query('take');
+        $skip = $request->query('skip');
+
+        return Car::paginate($take, $skip);
     }
 
     /**
